@@ -1,6 +1,6 @@
 package com.diegolovera.movvi.api
 
-import com.diegolovera.movvi.data.MovieDetails
+import com.diegolovera.movvi.data.models.MovieDetails
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit

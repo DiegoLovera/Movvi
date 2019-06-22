@@ -1,7 +1,7 @@
 package com.diegolovera.movvi.api
 
 import com.diegolovera.movvi.api.responses.GetMoviesResponse
-import com.diegolovera.movvi.data.MovieDetails
+import com.diegolovera.movvi.data.models.MovieDetails
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

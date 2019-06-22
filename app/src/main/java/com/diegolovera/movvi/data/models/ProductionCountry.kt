@@ -1,4 +1,4 @@
-package com.diegolovera.movvi.data
+package com.diegolovera.movvi.data.models
 
 import com.google.gson.annotations.SerializedName
 

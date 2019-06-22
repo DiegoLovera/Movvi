@@ -1,6 +1,6 @@
 package com.diegolovera.movvi.api.responses
 
-import com.diegolovera.movvi.data.Movie
+import com.diegolovera.movvi.data.models.Movie
 import com.google.gson.annotations.SerializedName
 
 class GetMoviesResponse(@SerializedName("page") var page: Int,
