@@ -24,7 +24,7 @@ class GenreRepository(context: Application) {
     fun getAllGenres(): LiveData<List<UniqueGenre>> {
         TheMovieApiClient.service.getGenres(TheMovieApiClient.API_KEY).enqueue(object : Callback<GetGenresResponse> {
             override fun onFailure(call: Call<GetGenresResponse>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                // do nothing
             }
 
             override fun onResponse(call: Call<GetGenresResponse>, response: Response<GetGenresResponse>) {
