@@ -2,13 +2,14 @@ package com.diegolovera.movvi.data.models
 
 import androidx.room.Entity
 import androidx.room.Ignore
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
 import kotlin.collections.ArrayList
 
-@Entity(tableName = "movie", primaryKeys = [ "id", "loadType" ])
+@Entity(tableName = "movie", primaryKeys = [ "id", "loadType" ], indices = [Index("id", unique = true)])
 class Movie() {
     @SerializedName("id")
     @Expose

@@ -5,14 +5,14 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "genre",
+    primaryKeys = [ "id", "movieId" ],
     indices = [Index("movieId")],
-    foreignKeys = [ForeignKey(entity = MovieDetails::class,
+    foreignKeys = [ForeignKey(entity = Movie::class,
         parentColumns = ["id"],
         childColumns = ["movieId"],
         onDelete = ForeignKey.CASCADE
     )])
-class Genre(@PrimaryKey
-            @Expose
+class Genre(@Expose
             @SerializedName("id")
             val id: Long,
 

@@ -92,18 +92,17 @@ class MovieRepository(context: Application) {
                     mMovieDao.update(movie)
                 }
                 movie.genres.forEach {
-                    val genre = Genre(it, "", movie.id)
+                    val genre = Genre(it, "temporal", movie.id)
                     try {
                         val genreId = mGenreDao.insert(genre)
                         if (genreId == -1L) {
                             mGenreDao.update(genre)
                         }
                     } catch (ex: SQLiteConstraintException) {
-
+                        ex.toString()
                     }
                 }
             }
-            mMovieDao.insertMovies(movies)
         }
     }
 
