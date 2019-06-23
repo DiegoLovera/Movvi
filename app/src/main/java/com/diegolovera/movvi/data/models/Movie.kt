@@ -1,62 +1,72 @@
 package com.diegolovera.movvi.data.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Entity(tableName = "movie", primaryKeys = [ "id", "loadType" ])
-class Movie(@SerializedName("id")
-            @Expose
-            val id: Long,
+class Movie() {
+    @SerializedName("id")
+    @Expose
+    var id: Long = 0
 
-            @SerializedName("vote_count")
-            @Expose
-            val voteCount: Int?,
+    @SerializedName("vote_count")
+    @Expose
+    var voteCount: Int? = 0
 
-            @SerializedName("video")
-            @Expose
-            val video: Boolean?,
+    @SerializedName("video")
+    @Expose
+    var video: Boolean? = false
 
-            @SerializedName("vote_average")
-            @Expose
-            val voteAverage: Float?,
+    @SerializedName("vote_average")
+    @Expose
+    var voteAverage: Float? = 0f
 
-            @SerializedName("title")
-            @Expose
-            val title: String?,
+    @SerializedName("title")
+    @Expose
+    var title: String? = ""
 
-            @SerializedName("popularity")
-            @Expose
-            val popularity: Float?,
+    @SerializedName("popularity")
+    @Expose
+    var popularity: Float? = 0f
 
-            @SerializedName("poster_path")
-            @Expose
-            val posterPath: String?,
+    @SerializedName("poster_path")
+    @Expose
+    var posterPath: String? = ""
 
-            @SerializedName("original_language")
-            @Expose
-            val originalLanguage: String?,
+    @SerializedName("original_language")
+    @Expose
+    var originalLanguage: String? = ""
 
-            @SerializedName("original_title")
-            @Expose
-            val originalTitle: String?,
+    @SerializedName("original_title")
+    @Expose
+    var originalTitle: String? = ""
 
-            @SerializedName("backdrop_path")
-            @Expose
-            val backdropPath: String?,
+    @SerializedName("genre_ids")
+    @Expose
+    @Ignore
+    var genres: List<Long> = ArrayList()
 
-            @SerializedName("adult")
-            @Expose
-            val adult: Boolean?,
+    @SerializedName("backdrop_path")
+    @Expose
+    var backdropPath: String? = ""
 
-            @SerializedName("overview")
-            @Expose
-            val overview: String?,
+    @SerializedName("adult")
+    @Expose
+    var adult: Boolean? = false
 
-            @SerializedName("release_date")
-            @Expose
-            val releaseDate: Date?,
+    @SerializedName("overview")
+    @Expose
+    var overview: String? = ""
 
-            var loadType: Int = 0)
+    @SerializedName("release_date")
+    @Expose
+    var releaseDate: Date? = Date()
+
+    var loadType: Int = 0
+
+}

@@ -5,20 +5,15 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-import com.diegolovera.movvi.data.db.daos.GenreDao;
-import com.diegolovera.movvi.data.db.daos.MovieDao;
-import com.diegolovera.movvi.data.db.daos.MovieDetailsDao;
-import com.diegolovera.movvi.data.db.daos.ProductionCountryDao;
-import com.diegolovera.movvi.data.models.Genre;
-import com.diegolovera.movvi.data.models.Movie;
-import com.diegolovera.movvi.data.models.MovieDetails;
-import com.diegolovera.movvi.data.models.ProductionCountry;
+import com.diegolovera.movvi.data.db.daos.*;
+import com.diegolovera.movvi.data.models.*;
 
 @Database(entities = {
         Movie.class,
         MovieDetails.class,
         Genre.class,
-        ProductionCountry.class
+        ProductionCountry.class,
+        UniqueGenre.class
 },
         version = 1,
         exportSchema = false)
@@ -29,6 +24,7 @@ public abstract class MovviRoomDatabase extends RoomDatabase {
     public abstract MovieDetailsDao movieDetailsDao();
     public abstract GenreDao genreDao();
     public abstract ProductionCountryDao productionCountryDao();
+    public abstract UniqueGenreDao uniqueGenreDao();
 
     private static volatile MovviRoomDatabase mInstance;
 

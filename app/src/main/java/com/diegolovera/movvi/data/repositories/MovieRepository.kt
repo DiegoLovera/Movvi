@@ -1,13 +1,16 @@
 package com.diegolovera.movvi.data.repositories
 
 import android.app.Application
+import android.database.sqlite.SQLiteConstraintException
 import android.os.AsyncTask
 import androidx.paging.DataSource
 import com.diegolovera.movvi.api.TheMovieApiClient
 import com.diegolovera.movvi.api.responses.GetMoviesResponse
 import com.diegolovera.movvi.data.MovieBoundaryCallback
 import com.diegolovera.movvi.data.db.MovviRoomDatabase
+import com.diegolovera.movvi.data.db.daos.GenreDao
 import com.diegolovera.movvi.data.db.daos.MovieDao
+import com.diegolovera.movvi.data.models.Genre
 import com.diegolovera.movvi.data.models.Movie
 import com.diegolovera.movvi.utils.PageUtils
 import retrofit2.Call
@@ -16,10 +19,12 @@ import retrofit2.Response
 
 class MovieRepository(context: Application) {
     private val mMovieDao: MovieDao
+    private val mGenreDao: GenreDao
 
     init {
         val db = MovviRoomDatabase.getInstance(context)
         mMovieDao = db.movieDao()
+        mGenreDao = db.genreDao()
     }
 
     fun refresh() {
@@ -80,11 +85,22 @@ class MovieRepository(context: Application) {
 
     fun upsert(movies: List<Movie>, loadType: MovieBoundaryCallback.LoadType) {
         AsyncTask.execute {
-            movies.forEach {
-                it.loadType = loadType.value
-                val id = mMovieDao.insert(it)
+            movies.forEach {movie ->
+                movie.loadType = loadType.value
+                val id = mMovieDao.insert(movie)
                 if (id == -1L) {
-                    mMovieDao.update(it)
+                    mMovieDao.update(movie)
+                }
+                movie.genres.forEach {
+                    val genre = Genre(it, "", movie.id)
+                    try {
+                        val genreId = mGenreDao.insert(genre)
+                        if (genreId == -1L) {
+                            mGenreDao.update(genre)
+                        }
+                    } catch (ex: SQLiteConstraintException) {
+
+                    }
                 }
             }
             mMovieDao.insertMovies(movies)

@@ -1,5 +1,6 @@
 package com.diegolovera.movvi.api
 
+import com.diegolovera.movvi.api.responses.GetGenresResponse
 import com.diegolovera.movvi.api.responses.GetMoviesResponse
 import com.diegolovera.movvi.data.models.MovieDetails
 import retrofit2.Call
@@ -23,4 +24,7 @@ interface TheMovieApiServices {
     @GET("/3/movie/{movieId}")
     fun getMovieDetails(@Path("movieId") movieId: Long,
                         @Query("api_key") apiKey: String): Call<MovieDetails>
+
+    @GET("3/genre/movie/list")
+    fun getGenres(@Query("api_key") apiKey: String): Call<GetGenresResponse>
 }

@@ -21,4 +21,18 @@ object ViewUtils {
         chip.isCloseIconVisible = false
         return chip
     }
+
+    fun createChip(text: String, selectable: Boolean, context: Context): Chip {
+        val chip = Chip(context)
+        chip.text = text
+        val shape = ShapeAppearanceModel()
+        shape.setAllCorners(CornerFamily.ROUNDED, 18)
+        val chipDrawable = ChipDrawable.createFromResource(context, R.xml.filter_chip_style)
+        chipDrawable.shapeAppearanceModel = shape
+        chip.setChipDrawable(chipDrawable)
+        chip.isClickable = selectable
+        chip.isCheckable = selectable
+        chip.isCloseIconVisible = false
+        return chip
+    }
 }
