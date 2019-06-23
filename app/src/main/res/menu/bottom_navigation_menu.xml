@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/popular"
+            android:icon="@drawable/ic_whatshot_black"
+            android:title="@string/popular" />
+    <item
+            android:id="@+id/top"
+            android:icon="@drawable/ic_star_black"
+            android:title="@string/top_rated" />
+    <item
+            android:id="@+id/upcoming"
+            android:icon="@drawable/ic_new_releases_black"
+            android:title="@string/upcoming" />
+    <item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_search_black"
+            android:title="@string/search" />
+
+</menu>

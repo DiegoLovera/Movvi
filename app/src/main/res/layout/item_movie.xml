@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/background_movie_card">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <ImageView
+                android:layout_width="100dp"
+                android:layout_height="0dp"
+                tools:srcCompat="@color/colorAccent"
+                android:id="@+id/poster_movie_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="false"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_movie_text"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/poster_movie_image"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/percentage_movie_text"
+                android:layout_marginEnd="8dp"
+                tools:text="Toy Story 4"
+                android:textSize="18sp"
+                android:textColor="@color/colorTitle"
+                android:ellipsize="marquee"
+                android:singleLine="true"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/percentage_movie_text" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" tools:text="65%" android:textColor="@color/colorAccent"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/overview_movie_text"
+                app:layout_constraintStart_toEndOf="@+id/poster_movie_image"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                tools:text="Woody has always been confident about his place in the world and that his priority is taking care of his kid, whether that's Andy or Bonnie. But when Bonnie adds a reluctant new toy called &quot;Forky&quot; to her room, s been confident about his place in the world and that his priority is taking care of his kid, whether that's Andy or Bonnie. But when Bonnie adds a reluctant new toy called &quot;Forky&quot; to her "
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/release_movie_text"
+                android:textSize="12sp"
+                android:ellipsize="end"
+                android:maxLines="5"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/release_movie_text"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/title_movie_text"
+                app:layout_constraintEnd_toEndOf="@+id/title_movie_text"
+                android:textSize="12sp"
+                tools:text="June 21, 2019"
+                app:layout_constraintStart_toStartOf="@+id/title_movie_text"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

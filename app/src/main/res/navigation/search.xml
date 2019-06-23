@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/search"
+            app:startDestination="@id/searchMoviesFragment">
+
+    <fragment android:id="@+id/searchMoviesFragment"
+              android:name="com.diegolovera.movvi.ui.fragments.SearchMoviesFragment"
+              android:label="@string/search_label"
+              tools:layout="@layout/fragment_search_movies"/>
+</navigation>

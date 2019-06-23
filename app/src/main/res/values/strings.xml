@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">Movvi</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="top_rated_label">Top Rated Movies</string>
+    <string name="upcoming_label">Upcoming Movies</string>
+    <string name="search_label">Search</string>
+    <string name="popular_label">Popular Movies</string>
+
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="search">Search</string>
+    <string name="popular">Popular</string>
+    <string name="budget">Budget:</string>
+    <string name="revenue">Revenue:</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis est vitae erat laoreet consectetur. Mauris
+        dui mauris, dictum vel egestas vel, porta sed ante. Phasellus congue viverra ipsum, in elementum arcu ultricies
+        nec.Morbi tincidunt nisl lacinia, placerat nisi eget, luctus tortor. Morbi efficitur dictum leo, sit amet
+        volutpat lorem sodales nec. Quisque et erat et turpis fringilla condimentum. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Mauris auctor vulputate libero vitae iaculis. Curabitur id blandit quam. Praesent
+        massa ante, pulvinar vitae sagittis commodo, scelerisque porttitor eros. Mauris suscipit a enim nec congue.
+    </string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="light_theme">Light Theme</string>
 </resources>
