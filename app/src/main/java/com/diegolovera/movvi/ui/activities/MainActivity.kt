@@ -13,20 +13,25 @@ import androidx.navigation.NavController
 import androidx.navigation.ui.NavigationUI
 import com.diegolovera.movvi.R
 import com.diegolovera.movvi.utils.PreferenceUtils
+import com.diegolovera.movvi.utils.ScrollToTop
 import com.diegolovera.movvi.utils.setupWithNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.greenrobot.eventbus.EventBus
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mToolbar: Toolbar
     private lateinit var mBottomNavigationView: BottomNavigationView
     private var mCurrentNavController: LiveData<NavController>? = null
+    private lateinit var appBar: AppBarLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadInitialTheme()
         setContentView(R.layout.activity_main)
         mToolbar = findViewById(R.id.toolbar)
+        appBar = findViewById(R.id.main_app_bar)
         setSupportActionBar(mToolbar)
 
         if (savedInstanceState == null) {
@@ -87,7 +92,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         mBottomNavigationView.setOnNavigationItemReselectedListener {
-            mCurrentNavController.value.currentDestination.
+            appBar.setExpanded(true, true)
+            EventBus.getDefault().post(ScrollToTop(it.itemId))
         }
 
         controller.observe(this, Observer { navController ->

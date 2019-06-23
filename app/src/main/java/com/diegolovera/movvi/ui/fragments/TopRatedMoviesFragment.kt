@@ -19,7 +19,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.diegolovera.movvi.R
 import com.diegolovera.movvi.data.models.Movie
 import com.diegolovera.movvi.ui.adapters.TopRatedMovieItemAdapter
+import com.diegolovera.movvi.utils.ScrollToTop
 import com.diegolovera.movvi.viewModels.TopRatedMoviesViewModel
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 
 /**
@@ -32,6 +36,7 @@ class TopRatedMoviesFragment : Fragment() {
     private lateinit var mAdapter: TopRatedMovieItemAdapter
     private lateinit var mProgressBar: ProgressBar
     private lateinit var mSwipeContainer: SwipeRefreshLayout
+    private lateinit var mRecycler: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +55,7 @@ class TopRatedMoviesFragment : Fragment() {
             R.color.colorPrimaryDark,
             R.color.colorAccent)
 
-        val mRecycler = v.findViewById<RecyclerView>(R.id.top_rated_movies_recycler)
+        mRecycler = v.findViewById(R.id.top_rated_movies_recycler)
         mRecycler.setHasFixedSize(true)
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -66,5 +71,22 @@ class TopRatedMoviesFragment : Fragment() {
             mSwipeContainer.isRefreshing = false
         })
         return v
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun scrollOnTop(who: ScrollToTop) {
+        if (who.id == R.id.top) {
+            mRecycler.smoothScrollToPosition(0)
+        }
     }
 }

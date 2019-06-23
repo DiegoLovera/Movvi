@@ -19,7 +19,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.diegolovera.movvi.R
 import com.diegolovera.movvi.data.models.Movie
 import com.diegolovera.movvi.ui.adapters.UpcomingMovieItemAdapter
+import com.diegolovera.movvi.utils.ScrollToTop
 import com.diegolovera.movvi.viewModels.UpcomingMoviesViewModel
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 
 /**
@@ -55,7 +59,7 @@ class UpcomingMoviesFragment : Fragment() {
             R.color.colorAccent
         )
 
-        mRecycler = v.findViewById<RecyclerView>(R.id.upcoming_movies_recycler)
+        mRecycler = v.findViewById(R.id.upcoming_movies_recycler)
         mRecycler.setHasFixedSize(true)
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -72,5 +76,21 @@ class UpcomingMoviesFragment : Fragment() {
         })
         return v
     }
-}
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun scrollOnTop(who: ScrollToTop) {
+        if (who.id == R.id.upcoming) {
+            mRecycler.smoothScrollToPosition(0)
+        }
+    }
+}
