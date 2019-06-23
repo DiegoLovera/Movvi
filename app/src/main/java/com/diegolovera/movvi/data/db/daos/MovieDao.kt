@@ -24,6 +24,9 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE loadType = 3 ORDER BY popularity DESC")
     fun allUpcomingMovies(): DataSource.Factory<Int, Movie>
 
+    @Query("SELECT m.* FROM movie m INNER JOIN genre g ON m.id = g.movieId WHERE g.id IN (:filterValues)")
+    fun allMoviesByGenre(filterValues: List<Int>): List<Movie>
+
     @Query("DELETE FROM movie WHERE loadType = 1")
     fun deleteAllPopular()
 

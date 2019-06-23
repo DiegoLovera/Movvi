@@ -18,17 +18,29 @@ import com.google.android.material.card.MaterialCardView
 import com.squareup.picasso.Picasso
 import kotlin.math.roundToInt
 
-class SearchMovieItemAdapter (context: Context)
-    : PagedListAdapter<Movie, SearchMovieItemAdapter.ViewHolder>(DIFF_CALLBACK) {
-    private val mInflater: LayoutInflater = LayoutInflater.from(context)
+class SearchMovieItemAdapter (
+    mContext: Context,
+    private var contactList: List<Movie>?)
+    : RecyclerView.Adapter<SearchMovieItemAdapter.ViewHolder>(){
+
+    private val mInflater: LayoutInflater = LayoutInflater.from(mContext)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = mInflater.inflate(R.layout.item_movie, parent, false)
         return ViewHolder(view)
     }
 
+    override fun getItemCount(): Int {
+        return contactList!!.size
+    }
+
+    fun setData(data: List<Movie>) {
+        contactList = data
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.movie = getItem(position)
+        holder.movie = contactList!![position]
         if (holder.movie != null) {
             Picasso.get()
                 .load("https://image.tmdb.org/t/p/w500" + (holder.movie!!.posterPath ?: ""))
@@ -69,22 +81,6 @@ class SearchMovieItemAdapter (context: Context)
             val intent = Intent(c, MovieDetailActivity::class.java)
             intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ID, movie!!.id)
             c.startActivity(intent)
-        }
-    }
-
-    companion object {
-
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-                return (oldItem.id == newItem.id && oldItem.loadType == newItem.loadType)
-            }
-
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-                return (oldItem.title == newItem.title
-                        && oldItem.overview == newItem.overview
-                        && oldItem.voteAverage == newItem.voteAverage
-                        && oldItem.loadType == newItem.loadType)
-            }
         }
     }
 }

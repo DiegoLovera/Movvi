@@ -64,6 +64,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.facebook.stetho:stetho:1.5.1'
 
     // Testing
     testImplementation 'junit:junit:4.12'
