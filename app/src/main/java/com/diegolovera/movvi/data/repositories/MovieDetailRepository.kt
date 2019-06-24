@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.diegolovera.movvi.api.TheMovieApiClient
+import com.diegolovera.movvi.data.MovieBoundaryCallback
 import com.diegolovera.movvi.data.db.MovviRoomDatabase
 import com.diegolovera.movvi.data.db.daos.GenreDao
 import com.diegolovera.movvi.data.db.daos.MovieDetailsDao
@@ -23,7 +24,7 @@ class MovieDetailRepository(context: Application) {
         mProductionCountryDao = db.productionCountryDao()
     }
 
-    fun getMovieDetails(movieId: Long): LiveData<MovieDetailsRelation> {
+    fun getMovieDetails(movieId: Long, loadType: Int): LiveData<MovieDetailsRelation> {
         val dbResponse = mMovieDetailsDao.getDaysAndSubjectsFromUser(movieId)
         AsyncTask.execute {
             val movieDetails = TheMovieApiClient.getMovieDetails(movieId)
@@ -31,6 +32,7 @@ class MovieDetailRepository(context: Application) {
                 upsert(movieDetails)
                 movieDetails.genres.forEach{
                     it.movieId = movieDetails.id
+                    it.loadType = loadType
                     val id = mGenreDao.insert(it)
                     if (id == -1L) {
                         mGenreDao.update(it)

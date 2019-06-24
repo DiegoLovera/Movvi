@@ -10,6 +10,7 @@ import com.diegolovera.movvi.data.MovieBoundaryCallback
 import com.diegolovera.movvi.data.db.MovviRoomDatabase
 import com.diegolovera.movvi.data.db.daos.GenreDao
 import com.diegolovera.movvi.data.db.daos.MovieDao
+import com.diegolovera.movvi.data.db.daos.MovieDetailsDao
 import com.diegolovera.movvi.data.models.Genre
 import com.diegolovera.movvi.data.models.Movie
 import com.diegolovera.movvi.utils.PageUtils
@@ -20,11 +21,13 @@ import retrofit2.Response
 class MovieRepository(context: Application) {
     private val mMovieDao: MovieDao
     private val mGenreDao: GenreDao
+    private val mMovieDetailsDao: MovieDetailsDao
 
     init {
         val db = MovviRoomDatabase.getInstance(context)
         mMovieDao = db.movieDao()
         mGenreDao = db.genreDao()
+        mMovieDetailsDao = db.movieDetailsDao()
     }
 
     fun refresh() {
@@ -107,14 +110,20 @@ class MovieRepository(context: Application) {
     }
 
     fun deleteAllPopular() {
+        mGenreDao.deleteAllPopular()
+        mMovieDetailsDao.deleteAllPopular()
         mMovieDao.deleteAllPopular()
     }
 
     fun deleteAllTopRated() {
+        mGenreDao.deleteAllTopRated()
+        mMovieDetailsDao.deleteAllTopRated()
         mMovieDao.deleteAllTopRated()
     }
 
     fun deleteAllUpcoming() {
+        mGenreDao.deleteAllUpcoming()
+        mMovieDetailsDao.deleteAllUpcoming()
         mMovieDao.deleteAllUpcoming()
     }
 

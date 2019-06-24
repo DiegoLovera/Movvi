@@ -1,9 +1,6 @@
 package com.diegolovera.movvi.data.db.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
 import com.diegolovera.movvi.data.models.Genre
 
 @Dao
@@ -13,4 +10,13 @@ interface GenreDao {
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     fun update(vararg genre: Genre)
+
+    @Query("DELETE FROM genre WHERE movieId IN (SELECT id FROM movie WHERE loadType = 1)")
+    fun deleteAllPopular()
+
+    @Query("DELETE FROM genre WHERE movieId IN (SELECT id FROM movie WHERE loadType = 2)")
+    fun deleteAllTopRated()
+
+    @Query("DELETE FROM genre WHERE movieId IN (SELECT id FROM movie WHERE loadType = 3)")
+    fun deleteAllUpcoming()
 }

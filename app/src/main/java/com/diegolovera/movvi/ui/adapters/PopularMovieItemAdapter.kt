@@ -68,6 +68,7 @@ class PopularMovieItemAdapter (context: Context)
         private fun openDetails(c: Context) {
             val intent = Intent(c, MovieDetailActivity::class.java)
             intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ID, movie!!.id)
+            intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_LOAD_TYPE, movie!!.loadType)
             c.startActivity(intent)
         }
     }

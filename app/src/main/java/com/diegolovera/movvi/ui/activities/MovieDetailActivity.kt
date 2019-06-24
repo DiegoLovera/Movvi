@@ -42,6 +42,7 @@ import kotlin.math.abs
 class MovieDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
     companion object {
         const val EXTRA_MOVIE_ID: String = "EXTRA_MOVIE_ID"
+        const val EXTRA_MOVIE_LOAD_TYPE: String = "EXTRA_MOVIE_LOAD_TYPE"
     }
 
     private lateinit var mViewModel: MovieDetailViewModel
@@ -106,7 +107,7 @@ class MovieDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
         mRatingBar.stepSize = 0.1f
         mMaxScrollSize = appbarLayout.totalScrollRange
 
-        mViewModel.getMovieDetails(intent.getLongExtra(EXTRA_MOVIE_ID, 0L))
+        mViewModel.getMovieDetails(intent.getLongExtra(EXTRA_MOVIE_ID, 0L), intent.getIntExtra(EXTRA_MOVIE_LOAD_TYPE, 0))
             .observe(this, Observer<MovieDetailsRelation> {
                 if (it != null) {
                     if (intent.getLongExtra(EXTRA_MOVIE_ID, 0L) == it.movieDetails!!.id) {
