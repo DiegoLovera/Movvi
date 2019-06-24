@@ -98,6 +98,9 @@ class MainActivity : AppCompatActivity() {
 
         controller.observe(this, Observer { navController ->
             NavigationUI.setupActionBarWithNavController(this, navController)
+            navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                appBar.setExpanded(true, true)
+            }
         })
         mCurrentNavController = controller
     }

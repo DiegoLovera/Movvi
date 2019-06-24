@@ -15,9 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diegolovera.movvi.R
 import com.diegolovera.movvi.ui.adapters.SearchMovieItemAdapter
+import com.diegolovera.movvi.utils.ScrollToTop
 import com.diegolovera.movvi.utils.ViewUtils
 import com.diegolovera.movvi.viewModels.SearchViewModel
 import com.google.android.material.chip.ChipGroup
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * A simple [Fragment] subclass.
@@ -66,6 +70,7 @@ class SearchMoviesFragment : Fragment() {
                         } else {
                             mFilterValues.remove(buttonView.id)
                         }
+                        mRecycler.smoothScrollToPosition(0)
                         mViewModel.filterMovies(mFilterValues)
                     }
                     mChipMovieGenresGroup.addView(chip)
@@ -81,5 +86,21 @@ class SearchMoviesFragment : Fragment() {
         return v
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun scrollOnTop(who: ScrollToTop) {
+        if (who.id == R.id.search) {
+            mRecycler.smoothScrollToPosition(0)
+        }
+    }
 
 }

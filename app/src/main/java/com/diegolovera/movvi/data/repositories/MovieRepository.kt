@@ -13,7 +13,6 @@ import com.diegolovera.movvi.data.db.daos.MovieDao
 import com.diegolovera.movvi.data.db.daos.MovieDetailsDao
 import com.diegolovera.movvi.data.models.Genre
 import com.diegolovera.movvi.data.models.Movie
-import com.diegolovera.movvi.utils.PageUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
