@@ -92,7 +92,7 @@ class MovieRepository(context: Application) {
                     mMovieDao.update(movie)
                 }
                 movie.genres.forEach {
-                    val genre = Genre(it, "temporal", movie.id)
+                    val genre = Genre(it, "temporal", movie.loadType, movie.id)
                     try {
                         val genreId = mGenreDao.insert(genre)
                         if (genreId == -1L) {

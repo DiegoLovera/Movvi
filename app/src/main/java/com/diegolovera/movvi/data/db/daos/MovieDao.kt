@@ -6,8 +6,6 @@ import com.diegolovera.movvi.data.models.Movie
 
 @Dao
 interface MovieDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(movies: List<Movie>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(movieDetails: Movie): Long
@@ -24,7 +22,7 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE loadType = 3 ORDER BY popularity DESC")
     fun allUpcomingMovies(): DataSource.Factory<Int, Movie>
 
-    @Query("SELECT m.* FROM movie m INNER JOIN genre g ON m.id = g.movieId WHERE g.id IN (:filterValues)")
+    @Query("SELECT m.* FROM movie m INNER JOIN genre g ON m.id = g.movieId AND m.loadType = g.loadType WHERE g.id IN (:filterValues)")
     fun allMoviesByGenre(filterValues: List<Int>): List<Movie>
 
     @Query("DELETE FROM movie WHERE loadType = 1")

@@ -8,7 +8,7 @@ import com.diegolovera.movvi.utils.PageUtils
 
 class MovieBoundaryCallback(private val application: Application, private val loadType: LoadType) : PagedList.BoundaryCallback<Movie>() {
     companion object {
-        const val PAGE_SIZE = 5
+        const val PAGE_SIZE = 20
     }
 
     enum class LoadType(val value: Int) {

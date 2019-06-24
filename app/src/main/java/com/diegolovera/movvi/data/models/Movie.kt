@@ -9,7 +9,8 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 import kotlin.collections.ArrayList
 
-@Entity(tableName = "movie", primaryKeys = [ "id", "loadType" ], indices = [Index("id", unique = true)])
+@Entity(tableName = "movie",
+    primaryKeys = [ "id", "loadType" ])
 class Movie() {
     @SerializedName("id")
     @Expose
