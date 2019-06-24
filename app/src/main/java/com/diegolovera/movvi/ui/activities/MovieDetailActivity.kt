@@ -24,6 +24,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.palette.graphics.Palette
 import com.diegolovera.movvi.R
+import com.diegolovera.movvi.data.models.Genre
 import com.diegolovera.movvi.data.models.MovieDetailsRelation
 import com.diegolovera.movvi.utils.DateUtils
 import com.diegolovera.movvi.utils.FlagsUtils
@@ -143,8 +144,20 @@ class MovieDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
                             else -> mTextMovieTagLine.visibility = View.VISIBLE
                         }
                         mChipMovieGenresGroup.removeAllViews()
+                        val finalGenresList: ArrayList<Genre> = ArrayList()
                         it.genres.forEach { genre ->
-                            mChipMovieGenresGroup.addView(ViewUtils.createChip(genre.name, this))
+                            var isInList = false
+                            finalGenresList.forEach { genreFiltered ->
+                                if (genre.id == genreFiltered.id) {
+                                    isInList = true
+                                }
+                            }
+                            if (!isInList) {
+                                finalGenresList.add(genre)
+                            }
+                        }
+                        finalGenresList.forEach {finalGenre ->
+                            mChipMovieGenresGroup.addView(ViewUtils.createChip(finalGenre.name, this))
                         }
                         mChipMovieGenresGroup.setChipSpacing(8)
                     }

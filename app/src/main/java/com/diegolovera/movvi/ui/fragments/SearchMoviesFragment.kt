@@ -74,7 +74,9 @@ class SearchMoviesFragment : Fragment() {
                     chip.id = genre.id.toInt()
                     chip.setOnCheckedChangeListener { buttonView, isChecked ->
                         if (isChecked) {
-                            mFilterValues.add(buttonView.id)
+                            if (!mFilterValues.contains(buttonView.id)) {
+                                mFilterValues.add(buttonView.id)
+                            }
                         } else {
                             mFilterValues.remove(buttonView.id)
                         }
@@ -88,7 +90,6 @@ class SearchMoviesFragment : Fragment() {
                     }
                     mChipMovieGenresGroup.addView(chip)
                     if (chip.id in mFilterValues) {
-                        chip.isSelected = true
                         chip.isChecked = true
                     }
                 }
