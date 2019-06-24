@@ -23,4 +23,5 @@
     </string>
     <string name="dark_theme">Dark Theme</string>
     <string name="light_theme">Light Theme</string>
+    <string name="no_elements_search_list">Select at least one option in the top to look at some movies</string>
 </resources>

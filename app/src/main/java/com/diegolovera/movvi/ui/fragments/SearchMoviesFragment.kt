@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -33,6 +34,7 @@ class SearchMoviesFragment : Fragment() {
     private lateinit var mRecycler: RecyclerView
     private lateinit var mAdapter: SearchMovieItemAdapter
     private lateinit var mFilterValues: ArrayList<Int>
+    private lateinit var mTextNoElements: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +48,15 @@ class SearchMoviesFragment : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_search_movies, container, false)
         mChipMovieGenresGroup = v.findViewById(R.id.genres_filter_chip_group)
-
+        mTextNoElements = v.findViewById(R.id.no_elements_search_text)
         mRecycler = v.findViewById(R.id.filter_list_recycler)
         mRecycler.setHasFixedSize(true)
+
+        if (mFilterValues.isEmpty()) {
+            mTextNoElements.visibility = View.VISIBLE
+        } else {
+            mTextNoElements.visibility = View.GONE
+        }
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             mRecycler.layoutManager = LinearLayoutManager(context)
@@ -70,10 +78,19 @@ class SearchMoviesFragment : Fragment() {
                         } else {
                             mFilterValues.remove(buttonView.id)
                         }
+                        if (mFilterValues.isEmpty()) {
+                            mTextNoElements.visibility = View.VISIBLE
+                        } else {
+                            mTextNoElements.visibility = View.GONE
+                        }
                         mRecycler.smoothScrollToPosition(0)
                         mViewModel.filterMovies(mFilterValues)
                     }
                     mChipMovieGenresGroup.addView(chip)
+                    if (chip.id in mFilterValues) {
+                        chip.isSelected = true
+                        chip.isChecked = true
+                    }
                 }
             }
             mChipMovieGenresGroup.setChipSpacing(8)
