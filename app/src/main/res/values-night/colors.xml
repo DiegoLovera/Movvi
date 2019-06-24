@@ -2,10 +2,10 @@
 <resources>
     <color name="colorPrimary">#121212</color>
     <color name="colorPrimaryDark">#121212</color>
-    <color name="colorAccent">#ff5252</color>
+    <color name="colorAccent">#26a69a</color>
 
     <color name="imagePlaceHolderColor">#00000000</color>
 
     <color name="colorTitle">#FFF</color>
-    <color name="colorPrimaryDarkPreLollipop">#c50e29</color>
+    <color name="colorPrimaryDarkPreLollipop">#00766c</color>
 </resources>
