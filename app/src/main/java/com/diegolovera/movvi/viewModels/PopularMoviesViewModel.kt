@@ -17,11 +17,8 @@ import android.net.ConnectivityManager
 
 class PopularMoviesViewModel(application: Application) : AndroidViewModel(application) {
     private val mRepository: MovieRepository = MovieRepository.getInstance(application)
-    private val dataSourceFactory: DataSource.Factory<Int, Movie>
+    private val dataSourceFactory: DataSource.Factory<Int, Movie> = mRepository.allPopularMovies()
     private val cm = application.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-    init {
-        dataSourceFactory = mRepository.allPopularMovies()
-    }
 
     private val pagedListConfig = PagedList.Config.Builder()
         .setEnablePlaceholders(true)
