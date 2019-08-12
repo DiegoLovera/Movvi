@@ -3,28 +3,24 @@ package com.diegolovera.movvi.ui.fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.lifecycle.ViewModelProviders
-import androidx.paging.PageKeyedDataSource
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-
 import com.diegolovera.movvi.R
-import com.diegolovera.movvi.data.models.Movie
 import com.diegolovera.movvi.ui.adapters.TopRatedMovieItemAdapter
 import com.diegolovera.movvi.utils.ScrollToTop
 import com.diegolovera.movvi.viewModels.TopRatedMoviesViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -40,7 +36,7 @@ class TopRatedMoviesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(TopRatedMoviesViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(TopRatedMoviesViewModel::class.java)
     }
 
     override fun onCreateView(

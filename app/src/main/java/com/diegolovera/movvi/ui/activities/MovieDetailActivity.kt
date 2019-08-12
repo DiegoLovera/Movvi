@@ -21,7 +21,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.forEach
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.palette.graphics.Palette
 import com.diegolovera.movvi.R
 import com.diegolovera.movvi.data.models.Genre
@@ -72,7 +72,7 @@ class MovieDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
-        mViewModel = ViewModelProviders.of(this).get(MovieDetailViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(MovieDetailViewModel::class.java)
         mCollapsingToolbar = findViewById(R.id.movie_details_collapsing)
         mCollapsingToolbar.title = ""
         mCoverImageView = findViewById(R.id.movie_details_backdrop)

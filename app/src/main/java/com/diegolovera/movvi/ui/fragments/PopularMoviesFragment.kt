@@ -9,19 +9,18 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.diegolovera.movvi.R
 import com.diegolovera.movvi.ui.adapters.PopularMovieItemAdapter
 import com.diegolovera.movvi.utils.ScrollToTop
 import com.diegolovera.movvi.viewModels.PopularMoviesViewModel
+import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import kotlinx.android.synthetic.main.fragment_popular_movies.*
 
 /**
  * A simple [Fragment] subclass.
@@ -54,7 +53,7 @@ class PopularMoviesFragment : Fragment() {
         mAdapter = context?.let { PopularMovieItemAdapter(it) }!!
         popular_movies_recycler.adapter = mAdapter
 
-        mViewModel = ViewModelProviders.of(this).get(PopularMoviesViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(PopularMoviesViewModel::class.java)
 
         mViewModel.movies.observe(this, Observer{
             mAdapter.submitList(it)
